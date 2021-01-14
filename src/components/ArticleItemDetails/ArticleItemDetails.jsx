@@ -1,10 +1,16 @@
 import React from "react";
 import "./styles.scss";
-class ArticleItemDetails extends React.Component {
+import { Link, withRouter } from "react-router-dom";
+import moment from "moment";
+class ArticleItemDetail extends React.Component {
+differenceDays = (date) => {
+    const diff = moment(this.props.article.createdAt).fromNow();
+    return diff;
+  };
   render() {
     return (
       <div className={"pr-3"}>
-        <div className={"d-flex align-center mb-2"}>
+        <div className={"d-flex align-center mb-2"} onClick={() => this.props.history.push(`/read/${this.props.article._id}`)}>
           <img
           alt="cover"
             style={{ width: "20px", height: "20px" }}
@@ -14,13 +20,14 @@ class ArticleItemDetails extends React.Component {
           />
 
           <span className={"author"}>
-            <a href="/">
-              <b>{this.props.article.author} </b> in <b>Better Advice</b>
-            </a>
+
+              <b onClick={() => this.props.history.push(`/read/${this.props.article._id}`)}>{this.props.article.author} </b> in <b>{this.props.article.category}</b>
+           
           </span>
         </div>
-        <a href="/">
+
           <span
+          onClick={() => this.props.history.push(`/read/${this.props.article._id}`)}
             className={"heading"}
             style={{
               fontSize: this.props.headingFont === "small" ? "16px" : "22px",
@@ -29,19 +36,18 @@ class ArticleItemDetails extends React.Component {
           >
             {this.props.article.headLine}
           </span>
-        </a>
 
         {this.props.subheading && (
           <div className={"subheading"}>
-            <p>
-              <a href="/">{this.props.article.subHead}</a>
+            <p onClick={() => this.props.history.push(`/read/${this.props.article._id}`)}> 
+              {this.props.article.subHead}
             </p>
           </div>
         )}
         <div className={"d-flex align-baseline justify-between mt-2"}>
           <h4 className={"date"}>
             <div className={"d-flex"}>
-              <span>Oct 16, 2020</span>
+              <span>{this.differenceDays(this.props.article.createdAt)}</span>
               <div>
                 <span>
                   <span>·</span>
@@ -59,4 +65,4 @@ class ArticleItemDetails extends React.Component {
   }
 }
 
-export default ArticleItemDetails;
+export default withRouter(ArticleItemDetail);
