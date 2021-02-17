@@ -133,7 +133,7 @@ class Reactions extends Component {
         </div>
         <div>
           {this.state.reviews.map((review) => (
-            <AlignItemsList user={review.user} text={review.text} />
+            <AlignItemsList user={review.user} text={review.text} reviewId={review._id} articleId={this.props.articleId} />
           ))}
         </div>
         {this.state.error && (
