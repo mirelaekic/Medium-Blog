@@ -24,14 +24,13 @@ export default class Login extends Component {
             password: this.state.password,
         }).then(function (res){
             console.log(res)
-            localStorage.setItem('token', res.data.access);
+            localStorage.setItem('token', res.config.token);
             localStorage.setItem('user', res.config.data);
         }).catch(function (err){
             console.log(err)
         })
         event.preventDefault();
     }
-
     render() {
         if(localStorage.getItem("user")){
             return <Redirect to='/'/>
