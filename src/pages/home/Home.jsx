@@ -6,6 +6,7 @@ import Footer from "../../components/Footer/Footer";
 import PeopleList from "../../components/PeopleList/PeopleList";
 import TopicsToFollow from "../../components/TopicsToFollow/TopicsToFollow";
 import "./styles.scss";
+import {Redirect} from "react-router-dom"
 
 export default class Home extends Component {
   state = {
@@ -30,11 +31,20 @@ export default class Home extends Component {
     }
   };
 
+  logout() {
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+    <Redirect to='login'/>
+  }
   render() {
+    if(!localStorage.getItem("user")){
+      return <Redirect to='register'/>
+  }
     const { articles } = this.state;
     console.log("THE CURRENT STATE ARRAY", articles);
     return (
       <Container key={articles._id}>
+        <Button onClick={this.logout}variant="outline-secondary">Log out</Button>
         <Row
           key={articles._id}
           className={"row-cols-lg-3 pb-4"}

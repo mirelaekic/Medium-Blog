@@ -24,14 +24,13 @@ const useStyles = makeStyles((theme) => ({
 
 export default function AlignItemsList({ user, text, reviewId, articleId }) {
   const classes = useStyles();
+  console.log(reviewId,articleId, "ID FROM ARtiCLES")
   const deleteMethod = {
     method: "DELETE",
     headers: { "Content-type": "application/json" },
   };
-  let url =
-    "http://localhost:3003/articles/" + reviewId + "/reviews/" + articleId;
-  async function handleDelete() {
-    await fetch(url, deleteMethod)
+  const handleDelete = async () => {
+    await fetch("http://localhost:3003/articles/" + reviewId + "/reviews/" + articleId, deleteMethod)
       .then((response) => response.json())
       .then((res) => console.log(res));
   }
@@ -58,8 +57,8 @@ export default function AlignItemsList({ user, text, reviewId, articleId }) {
           }
         />
         <Tooltip title="Delete">
-          <IconButton aria-label="delete">
-            <DeleteIcon onClick={handleDelete} />
+          <IconButton aria-label="delete" onClick={handleDelete}>
+            <DeleteIcon  />
           </IconButton>
         </Tooltip>
       </ListItem>

@@ -15,6 +15,11 @@ import {
 } from "react-icons/io5";
 import {Link} from "react-router-dom"
 export default class NavBar extends Component {
+
+  logout() {
+    localStorage.removeItem('user');
+  }
+
   render() {
     return (
       <Navbar  style={{paddingTop:24}}>
