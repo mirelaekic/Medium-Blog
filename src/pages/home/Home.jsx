@@ -34,11 +34,11 @@ export default class Home extends Component {
   logout() {
     localStorage.removeItem('user');
     localStorage.removeItem('token');
-    <Redirect to='login'/>
+    <Redirect to='/login/register'/>
   }
   render() {
     if(!localStorage.getItem("user")){
-      return <Redirect to='register'/>
+      return <Redirect to='/login/register'/>
   }
     const { articles } = this.state;
     console.log("THE CURRENT STATE ARRAY", articles);

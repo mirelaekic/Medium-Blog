@@ -18,19 +18,38 @@ export default class Login extends Component {
     
 
     handleSubmit(event) {
-
+        event.preventDefault();
         axios.post('http://localhost:3003/authors/login',{
             username: this.state.email,
             password: this.state.password,
+            headers:{
+                "Authorization":"Basic c29tZWVtYWlsOnNhZHNkYWRzYQ=="
+            }
         }).then(function (res){
             console.log(res)
-            localStorage.setItem('token', res.config.token);
+            localStorage.setItem("accessToken", res.data.token)
             localStorage.setItem('user', res.config.data);
         }).catch(function (err){
             console.log(err)
         })
-        event.preventDefault();
     }
+
+    login = async ()=> {
+        const res = await axios("http://localhost:3003/authors/login", {
+          method: 'POST',
+          headers: {
+            "Authorization":res.data.accessToken,
+            "Content-Type": "application/json"
+          },
+          data: {
+            email: this.state.email, password: this.state.password
+          }, withCredentials: true // use cookies
+        })
+    
+        localStorage.setItem("accessToken", res.data.accessToken)
+      }
+
+    
     render() {
         if(localStorage.getItem("user")){
             return <Redirect to='/'/>
@@ -57,6 +76,11 @@ export default class Login extends Component {
                         Submit
                     </Button>
                 </Form>
+                <a href="http://localhost:3003/authors/googleLogin">
+                <Button className="mt-4">
+                    Sign in using google
+                </Button>
+                </a>
             </Container>
         )
     }

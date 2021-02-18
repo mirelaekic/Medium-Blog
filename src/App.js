@@ -11,6 +11,7 @@ import Stats from "./pages/stats"
 import Stories from "./pages/stories"
 import Register from "./components/Register/Register"
 import Login from "./components/Login/Login"
+import LoginRegister from "./pages/LoginRegister"
 const routes = [
   { path: "/", component: Home },
   { path: "/new-story", component: NewStory },
@@ -20,7 +21,9 @@ const routes = [
   { path: "/stats", component: Stats },
   { path: "/stories", component: Stories },
   { path:"/register", component:Register},
-  { path:"/login", component:Login}
+  { path:"/login", component:Login},
+  {path:"/login/register", component:LoginRegister}
+
 ]
 
 function App() {
