@@ -17,7 +17,7 @@ class Read extends Component {
   };
   fetchArticle = async (id) => {
     try {
-      let response = await fetch("http://localhost:3003/articles/" + id, {
+      let response = await fetch("https://medium-be.azurewebsites.net/articles/" + id, {
         method: "GET",
       });
       console.log(response);

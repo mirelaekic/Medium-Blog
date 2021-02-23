@@ -31,7 +31,7 @@ class Reactions extends Component {
   fetchReviews = async (articleId) => {
     try {
       let response = await fetch(
-        "http://localhost:3003/articles/" + articleId + "/reviews",
+        "https://medium-be.azurewebsites.net/articles/" + articleId + "/reviews",
         {
           method: "GET",
         }
@@ -52,7 +52,7 @@ class Reactions extends Component {
     this.setState({ loading: true })
     try {
       let id = this.props.articleId;
-      let response = await fetch("http://localhost:3003/articles/" + id, {
+      let response = await fetch("https://medium-be.azurewebsites.net/articles/" + id, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(this.state.newReview),

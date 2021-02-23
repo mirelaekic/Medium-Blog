@@ -24,10 +24,11 @@ export default class Register extends Component {
             email: this.state.email,
             password: this.state.password,
             surname: this.state.surname,
-            name: this.state.name
+            name: this.state.name,
+             withCredentials: true
         }).then(function (res){
             console.log(res)
-            localStorage.setItem('token', res.token);
+            localStorage.setItem("accessToken", res.data.token)
             localStorage.setItem('user', res.config.data);
         }).catch(function (err){
             console.log(err)

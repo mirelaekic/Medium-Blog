@@ -30,7 +30,7 @@ export default function AlignItemsList({ user, text, reviewId, articleId }) {
     headers: { "Content-type": "application/json" },
   };
   const handleDelete = async () => {
-    await fetch("http://localhost:3003/articles/" + reviewId + "/reviews/" + articleId, deleteMethod)
+    await fetch("https://medium-be.azurewebsites.net/articles/" + reviewId + "/reviews/" + articleId, deleteMethod)
       .then((response) => response.json())
       .then((res) => console.log(res));
   }

@@ -34,20 +34,40 @@ export default class Login extends Component {
         })
     }
 
-    login = async ()=> {
+    login = async (e)=> {
+        e.preventDefault()
         const res = await axios("http://localhost:3003/authors/login", {
           method: 'POST',
           headers: {
-            "Authorization":res.data.accessToken,
             "Content-Type": "application/json"
           },
           data: {
             email: this.state.email, password: this.state.password
           }, withCredentials: true // use cookies
         })
-    
-        localStorage.setItem("accessToken", res.data.accessToken)
+        console.log(res.data.token,"TOKENNNN")
+        localStorage.setItem('user', res.config.data);
+        localStorage.setItem("accessToken", res.data.token)
+        console.log(res.data.accessToken,"this should be the token")
+        console.log(res, "THIS IS the response")
       }
+    logintest = () => {
+        return axios.post("http://localhost:3003/authors/login", {
+            method: 'POST',
+            headers: {
+              "Content-Type": "application/json"
+            },
+            data: {
+              email: this.state.email, password: this.state.password
+            }, withCredentials: true // use cookies
+          }).then((response) => {
+            if (response.data.accessToken) {
+              localStorage.setItem("user", JSON.stringify(response.data));
+            }
+            console.log(response.data)
+            return response.data;
+          });
+    }
 
     
     render() {
@@ -72,7 +92,7 @@ export default class Login extends Component {
                     <Form.Group controlId="formBasicCheckbox">
                         <Form.Check type="checkbox" label="Check me out" />
                     </Form.Group>
-                    <Button variant="primary" type="submit" onClick={this.handleSubmit}>
+                    <Button variant="primary" type="submit" onClick={this.login}>
                         Submit
                     </Button>
                 </Form>
