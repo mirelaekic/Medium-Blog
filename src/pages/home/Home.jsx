@@ -14,7 +14,7 @@ export default class Home extends Component {
   };
   componentDidMount = async () => {
     try {
-      let response = await fetch("http://localhost:3003/articles", {
+      let response = await fetch("https://medium-be.azurewebsites.net/", {
         method: "GET",
         mode: "cors",
       });
